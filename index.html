@@ -87,6 +87,7 @@
 							bookmarks sync between your devices so you can access them on the go.
 						</p>
 					</div>
+
 					<!-- tabs -->
 					<div class="tabs">
 						<div class="tabs__btns" role="tablist">
@@ -94,19 +95,19 @@
 								type="button"
 								class="tabs__btn tabs__btn--selected"
 								role="tab"
-								data-tab-btn="1"
+								data-tab-btn="first"
 							>
 								Simple Bookmarking
 							</button>
-							<button type="button" class="tabs__btn" role="tab" data-tab-btn="2">
+							<button type="button" class="tabs__btn" role="tab" data-tab-btn="second">
 								Speedy Searching
 							</button>
-							<button type="button" class="tabs__btn" role="tab" data-tab-btn="3">
+							<button type="button" class="tabs__btn" role="tab" data-tab-btn="third">
 								Easy Sharing
 							</button>
 						</div>
 
-						<div class="tabs__content" data-tab-content="1" role="tabpanel">
+						<div class="tabs__content tabs__content--active" data-tab-content="first" role="tabpanel">
 							<img
 								src="images/illustration-features-tab-1.svg"
 								alt="simple bookmark"
@@ -123,8 +124,7 @@
 							</div>
 						</div>
 
-						<!-- FIXME: remove comments below -->
-						<!-- <div class="tabs__content" data-tab-content="2" role="tabpanel">
+						<div class="tabs__content" data-tab-content="second" role="tabpanel">
 							<img
 								src="images/illustration-features-tab-2.svg"
 								alt="speedy search"
@@ -141,11 +141,11 @@
 							</div>
 						</div>
 
-						<div class="tabs__content" data-tab-content="3" role="tabpanel">
+						<div class="tabs__content" data-tab-content="third" role="tabpanel">
 							<img
 								src="images/illustration-features-tab-3.svg"
 								alt="easy sharing"
-								class="tabs__img tabs__img3" 
+								class="tabs__img tabs__img3"
 							/>
 
 							<div class="tabs__text">
@@ -156,7 +156,7 @@
 								</p>
 								<a href="#" class="tabs__link btn btn-blue">More Info</a>
 							</div>
-						</div> -->
+						</div>
 					</div>
 				</div>
 			</section>
@@ -306,6 +306,7 @@
 
 					<form novalidate class="contact__form">
 						<input type="email" placeholder="Enter your email address" class="contact__input" />
+						<p class="contact__error">Whoops, make sure it's an email</p>
 						<button type="submit" class="contact__submit btn btn-alert">Contact Us</button>
 					</form>
 				</div>
@@ -344,5 +345,7 @@
 				</div>
 			</div>
 		</footer>
+
+		<script src="js/script.js"></script>
 	</body>
 </html>
