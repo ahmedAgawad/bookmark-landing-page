@@ -342,9 +342,14 @@ button[type="submit"] {
 }
 
 .tabs__content {
-	display: flex;
+	position: relative;
+	display: none;
 	align-items: flex-start;
 	justify-content: space-between;
+}
+
+.tabs__content--active {
+	display: flex;
 }
 
 .tabs__img1 {
@@ -497,19 +502,38 @@ button[type="submit"] {
 	transition: var(--link-hover);
 }
 
+.accordion__arrow {
+	transition: transform 200ms linear;
+}
+
 .accordion__btn:hover .accordion__title {
 	color: var(--soft-red);
 }
 
 .accordion__paragraph {
-	margin-bottom: 35px;
-	padding-top: 15px;
 	font-size: 1.025rem;
 	color: var(--very-dark-gray);
 	line-height: 2;
+	max-height: 0;
+	margin: 0;
+	padding: 0;
+	overflow-y: hidden;
+	transition: max-heigth 900ms ease-in-out, margin-bottom 100ms ease-in-out,
+		padding-top 100ms ease-in-out;
+}
 
-	/* FIXME: remove this after js */
-	display: none;
+.accordions__accordion--active .accordion__arrow {
+	transform: rotate(180deg);
+}
+
+.accordions__accordion--active .accordion__btn path {
+	stroke: var(--soft-red);
+}
+
+.accordions__accordion--active .accordion__paragraph {
+	max-height: 900px;
+	margin-bottom: 35px;
+	padding-top: 15px;
 }
 
 .faq__btn {
@@ -542,7 +566,10 @@ button[type="submit"] {
 }
 
 .contact__form {
+	position: relative;
+	width: fit-content;
 	height: 50px;
+	margin: auto;
 }
 
 .contact__input {
@@ -550,12 +577,41 @@ button[type="submit"] {
 	width: 300px;
 	height: 100%;
 	margin-right: 17.5px;
-	padding: 20px;
+	padding: 10px;
 	border-radius: 5px;
 	border: none;
 	font-size: 0.925rem;
 	font-weight: 500;
 	color: var(--very-dark-blue);
+}
+
+.contact__error {
+	display: none;
+	position: absolute;
+	left: 0;
+	top: 46px;
+	font-size: 0.775rem;
+	font-weight: 400;
+	color: var(--white);
+	font-style: italic;
+	background-color: var(--soft-red);
+	width: 300px;
+	border-radius: 0px 0px 5px 5px;
+	text-align: left;
+	padding-left: 10px;
+}
+
+.contact__form--error .contact__error {
+	display: block;
+}
+
+.contact__form--error .contact__input {
+	border: 4px solid var(--soft-red);
+	background-image: url("../images/icon-error.svg");
+	background-position: 95% center;
+	background-repeat: no-repeat;
+	outline: none;
+	padding-right: 40px;
 }
 
 .contact__input::placeholder {
@@ -733,21 +789,24 @@ button[type="submit"] {
 		position: fixed;
 		top: 0;
 		left: 0;
-		z-index: 2;
+		z-index: -2;
+		display: block;
 		width: 100%;
 		height: 100%;
 		padding: 40px 35px 40px 20px;
 		background-color: hsla(229, 25%, 25%, 0.902);
-		/* FIXME: delete after js */
-		display: none;
+		opacity: 0;
+	}
+
+	.header__nav--open {
+		z-index: 2;
+		opacity: 1;
 	}
 
 	.header__moblogo {
 		display: block;
 		margin-bottom: 40px;
 	}
-
-	/* FIXME: adjust the button on click to inc z index */
 
 	.header__links {
 		margin: 0;
@@ -822,8 +881,37 @@ button[type="submit"] {
 		background-color: var(--very-dark-blue);
 	}
 
+	.header__line:nth-of-type(1),
+	.header__line:nth-of-type(3) {
+		transition: transform 200ms linear;
+	}
+
 	.header__line:nth-of-type(2) {
 		margin: 3px 0px;
+		transition: opacity 150ms ease-in-out;
+	}
+
+	.header__hamburger--active {
+		position: relative;
+		z-index: 3;
+	}
+
+	.header__hamburger--active .header__line {
+		background-color: var(--white);
+	}
+
+	.header__hamburger--active .header__line:nth-of-type(2) {
+		opacity: 0;
+	}
+
+	.header__hamburger--active .header__line:nth-of-type(1) {
+		transform: rotate(45deg);
+		transform-origin: left;
+	}
+
+	.header__hamburger--active .header__line:nth-of-type(3) {
+		transform: rotate(-45deg);
+		transform-origin: left;
 	}
 
 	/* main -- tabs */
@@ -936,6 +1024,11 @@ button[type="submit"] {
 		font-size: 0.9rem;
 	}
 
+	/* main -- contact */
+	.contact__input {
+		font-size: 0.85rem;
+	}
+
 	/* footer */
 	.footer__logo {
 		margin-right: 35px;
@@ -1006,6 +1099,7 @@ button[type="submit"] {
 
 	.contact__form {
 		max-width: 375px;
+		width: 100%;
 		height: initial;
 		margin: auto;
 	}
@@ -1019,6 +1113,14 @@ button[type="submit"] {
 
 	.contact__input {
 		margin-bottom: 15px;
+	}
+	
+	.contact__form--error .contact__input {
+		margin-bottom: 40px;
+	}
+
+	.contact__error {
+		width: 100%;
 	}
 
 	/* footer */
